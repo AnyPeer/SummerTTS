@@ -96,7 +96,11 @@ Hanz2Piny::toPinyinFromUtf8 ( const std::string& s,
     for (auto iter = s.cbegin(); iter != s.cend(); NULL) {
         // 将单个字符（可能是汉字，也可能非汉字）的 UTF-8 转换为 unicode
         auto iter_old = iter;
-        utf8::next(iter, s.cend());
+        uint32_t res = utf8::next(iter, s.cend());
+        if (res == 0xFFFF) {
+            // printI("return(pinyin_list_list)");
+            return(pinyin_list_list);
+        }
         Unicode unicode;
         utf8::utf8to16(iter_old, iter, &unicode);
 

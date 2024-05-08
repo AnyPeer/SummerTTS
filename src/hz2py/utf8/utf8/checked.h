@@ -133,11 +133,16 @@ namespace utf8
         return utf8::replace_invalid(start, end, out, replacement_marker);
     }
 
+    #define printI(format,...)   printf("%s:%d " format "\n", __FUNCTION__, __LINE__, ##__VA_ARGS__)
     template <typename octet_iterator>
     uint32_t next(octet_iterator& it, octet_iterator end)
     {
         uint32_t cp = 0;
         internal::utf_error err_code = utf8::internal::validate_next(it, end, cp);
+        if (err_code != internal::UTF8_OK) {
+            printI("process UTF8 error: %d", err_code);
+            return 0xFFFF;
+        }
         switch (err_code) {
             case internal::UTF8_OK :
                 break;

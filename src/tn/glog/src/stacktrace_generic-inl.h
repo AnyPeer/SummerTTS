@@ -43,7 +43,12 @@ int GetStackTrace(void** result, int max_depth, int skip_count) {
   void * stack[kStackLength];
   int size;
 
-  size = backtrace(stack, kStackLength);
+#if defined(__ANDROID__) || defined(ANDROID)
+    size = 0;
+#else
+    size = backtrace(stack, kStackLength);
+#endif
+
   skip_count++;  // we want to skip the current frame as well
   int result_count = size - skip_count;
   if (result_count < 0)
