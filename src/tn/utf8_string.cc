@@ -14,14 +14,18 @@
 
 #include "utils/utf8_string.h"
 
+#ifndef __APPLE__
 #include "utils/log.h"
-
+#endif
 namespace wetext {
 const char* WHITESPACE = " \n\r\t\f\v";
 
 int char_length(char ch) {
   int num_bytes = 1;
+
+#ifndef __APPLE__
   CHECK_LE((ch & 0xF8), 0xF0);
+#endif
   if ((ch & 0x80) == 0x00) {
     // The first 128 characters (US-ASCII) in UTF-8 format only need one byte.
     num_bytes = 1;

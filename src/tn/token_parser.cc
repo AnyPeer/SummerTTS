@@ -14,7 +14,9 @@
 
 #include "processor/token_parser.h"
 
+#ifndef __APPLE__
 #include "utils/log.h"
+#endif
 #include "utils/utf8_string.h"
 
 namespace wetext {
@@ -49,7 +51,9 @@ TokenParser::TokenParser(ParseType type) {
 
 void TokenParser::load(const std::string& input) {
   string2chars(input, &text);
+#ifndef __APPLE__
   CHECK_GT(text.size(), 0);
+#endif
   index = 0;
   ch = text[0];
 }
@@ -91,9 +95,10 @@ bool TokenParser::parse_chars(const std::string& exp) {
 }
 
 std::string TokenParser::parse_key() {
+#ifndef __APPLE__
   CHECK_NE(ch, EOS);
   CHECK_EQ(UTF8_WHITESPACE.count(ch), 0);
-
+#endif
   std::string key = "";
   while (ASCII_LETTERS.count(ch) > 0) {
     key += ch;
@@ -103,7 +108,9 @@ std::string TokenParser::parse_key() {
 }
 
 std::string TokenParser::parse_value() {
+#ifndef __APPLE__
   CHECK_NE(ch, EOS);
+#endif
   bool escape = false;
 
   std::string value = "";
