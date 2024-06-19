@@ -4,6 +4,7 @@
 #define HANZ2PINY_H
 
 #include <string>
+#include <stdint.h>
 #include <vector>
 #include <map>
 

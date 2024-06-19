@@ -2,6 +2,7 @@
 #define _HANZI2PHONEID_H_
 
 #include <string>
+#include <stdint.h>
 #include <map>
 #include <vector>
 

@@ -2,6 +2,7 @@
 #define _PINYIN_MAP_H_
 
 #include <vector>
+#include <stdint.h>
 #include <string>
 #include <map>
 
